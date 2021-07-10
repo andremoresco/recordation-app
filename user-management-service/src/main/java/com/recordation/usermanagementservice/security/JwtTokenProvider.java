@@ -1,6 +1,6 @@
 package com.recordation.usermanagementservice.security;
 
-import com.recordation.usermanagementservice.useCases.findUser.FindUserByIdentifierUseCase;
+import com.recordation.usermanagementservice.useCases.findUserByIdentifier.FindUserByIdentifierUseCase;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

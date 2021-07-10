@@ -1,6 +1,6 @@
 package com.recordation.usermanagementservice.security;
 
-import com.recordation.usermanagementservice.useCases.findUser.FindUserByIdentifierUseCase;
+import com.recordation.usermanagementservice.useCases.findUserByIdentifier.FindUserByIdentifierUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

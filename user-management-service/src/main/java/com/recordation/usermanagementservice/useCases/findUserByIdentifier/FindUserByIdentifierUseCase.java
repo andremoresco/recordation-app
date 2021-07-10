@@ -1,4 +1,4 @@
-package com.recordation.usermanagementservice.useCases.findUser;
+package com.recordation.usermanagementservice.useCases.findUserByIdentifier;
 
 import com.recordation.usermanagementservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
