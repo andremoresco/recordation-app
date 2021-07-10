@@ -10,7 +10,7 @@ spring:
     database: POSTGRESQL
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       show-sql: true
       properties:

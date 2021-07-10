@@ -23,12 +23,18 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private UUID id;
+
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "user_identifier")
+    @Column(name = "user_identifier", unique = true, nullable = false)
     private String userIdentifier;
+
+    @Column(nullable = false)
     private String email;
     private String picture;
+
+    @Column(nullable = false)
     private String password;
 
     @Override
@@ -38,31 +44,31 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.userIdentifier;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
