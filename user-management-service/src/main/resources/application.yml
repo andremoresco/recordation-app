@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users
+    platform: porstgres
+    username: postgres
+    password: password
+    hikari:
+      maximumPoolSize: 5
+  jpa: POSTGRESQL
+  database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+  hibernate:
+    ddl-auto: update
+    naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    show-sql: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+        validator:
+          apply_to_ddl: true
+        check_nullability: true
+  database:
+    driverClassName: org.postgresql.Driver
