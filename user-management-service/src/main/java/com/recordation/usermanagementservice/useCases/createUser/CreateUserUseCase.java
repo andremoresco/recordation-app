@@ -1,17 +1,16 @@
 package com.recordation.usermanagementservice.useCases.createUser;
 
 import com.recordation.usermanagementservice.exceptions.UserAlreadyRegisteredException;
+import com.recordation.usermanagementservice.exceptions.UserArgumentsNotValidException;
 import com.recordation.usermanagementservice.model.User;
 import com.recordation.usermanagementservice.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+
 import java.util.Optional;
 
 @Service
-@Slf4j
 public class CreateUserUseCase {
 
     private final UserRepository userRepository;
@@ -23,8 +22,11 @@ public class CreateUserUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Transactional
-    public void execute(User user) throws UserAlreadyRegisteredException {
+    public void execute(User user) throws Exception {
+        Optional<String> notValid = user.isNotValid();
+        if (notValid.isPresent()) {
+            throw new UserArgumentsNotValidException(notValid.get());
+        }
 
         Optional<User> byUserIdentifier = this.userRepository.findByUserIdentifier(user.getUserIdentifier());
 

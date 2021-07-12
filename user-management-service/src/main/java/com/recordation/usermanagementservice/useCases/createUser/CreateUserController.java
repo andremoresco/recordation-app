@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class CreateUserController {
 
@@ -20,17 +22,13 @@ public class CreateUserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Object> handle(@RequestBody CreateUserDTO createUserDTO) {
-        try {
+    public ResponseEntity<Object> handle(@Valid @RequestBody CreateUserDTO createUserDTO) throws Exception {
+        ModelMapper modelMapper = new ModelMapper();
+        User user = modelMapper.map(createUserDTO, User.class);
 
-            ModelMapper modelMapper = new ModelMapper();
-            User user = modelMapper.map(createUserDTO, User.class);
+        this.createUserUseCase.execute(user);
 
-            this.createUserUseCase.execute(user);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }
