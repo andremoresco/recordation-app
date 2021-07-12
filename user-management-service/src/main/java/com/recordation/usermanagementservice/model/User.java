@@ -1,5 +1,6 @@
 package com.recordation.usermanagementservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,6 +47,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     @NotBlank(message = "Password is required!")
+    @JsonIgnore
     private String password;
 
     @Override
