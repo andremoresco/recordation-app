@@ -3,11 +3,13 @@ package com.recordation.usermanagementservice.useCases.createUser;
 import com.recordation.usermanagementservice.exceptions.UserAlreadyRegisteredException;
 import com.recordation.usermanagementservice.exceptions.UserArgumentsNotValidException;
 import com.recordation.usermanagementservice.model.User;
+import com.recordation.usermanagementservice.model.UserRole;
 import com.recordation.usermanagementservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -34,6 +36,11 @@ public class CreateUserUseCase {
             throw new UserAlreadyRegisteredException();
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (Objects.isNull(user.getRole())) {
+            user.setRole(UserRole.USER);
+        }
+
         this.userRepository.save(user);
 
     }

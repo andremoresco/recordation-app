@@ -3,6 +3,7 @@ package com.recordation.usermanagementservice.userCases.createUser;
 import com.recordation.usermanagementservice.exceptions.UserAlreadyRegisteredException;
 import com.recordation.usermanagementservice.exceptions.UserArgumentsNotValidException;
 import com.recordation.usermanagementservice.model.User;
+import com.recordation.usermanagementservice.model.UserRole;
 import com.recordation.usermanagementservice.repository.UserRepository;
 import com.recordation.usermanagementservice.useCases.createUser.CreateUserUseCase;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class CreateUserUseCaseTest {
 
     @Test
     public void createUserSuccess() throws Exception {
-        User user = new User(null, "Andre Moresco", "unit_test", "unit@test.com", null, "unit_test");
+        User user = new User(null, "Andre Moresco", "unit_test", "unit@test.com", null, "unit_test", UserRole.ADMIN);
         Mockito.when(passwordEncoder.encode(user.getPassword())).thenReturn(user.getPassword() + "_encoded");
         this.createUserUseCase.execute(user);
 
