@@ -19,7 +19,8 @@ import java.util.Objects;
 @Component
 public class JwtTokenProvider {
 
-    private String SECRET_KEY = "q3t6w9z$C&F)J@NcQfTjWnZr4u7x!A%D*G-KaPdSgUkXp2s5v8y/B?E(H+MbQeTh";
+    @Value("${security.jwt.secret}")
+    private String secretKey;
 
     @Value("${security.jwt.token.expire-length:3600000}")
     private long validityInMilliseconds;
@@ -28,7 +29,7 @@ public class JwtTokenProvider {
     private FindUserByIdentifierUseCase findUserByIdentifierUseCase;
 
     private byte[] getSecretKey() {
-        return SECRET_KEY.getBytes();
+        return secretKey.getBytes();
     }
 
     public String createToken(String username, String role) {
