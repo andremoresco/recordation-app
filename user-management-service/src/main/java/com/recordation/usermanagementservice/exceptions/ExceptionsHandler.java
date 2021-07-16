@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,6 +27,17 @@ public class ExceptionsHandler {
                 .body(HttpErrorResponse.builder()
                         .errorCode(e.code)
                         .message(e.message)
+                        .build());
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<HttpErrorResponse> handleUserNotFoundException(UsernameNotFoundException e, HttpServletRequest request) {
+        log.error(e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(HttpErrorResponse.builder()
+                        .errorCode("USER_NOT_FOUND")
+                        .message(e.getMessage())
                         .build());
     }
 

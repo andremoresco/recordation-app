@@ -1,6 +1,7 @@
 package com.recordation.usermanagementservice.useCases.createUser;
 
 
+import com.recordation.usermanagementservice.model.UserRole;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -23,5 +24,7 @@ public class CreateUserDTO {
 
     @NotBlank(message = "Password is required!")
     private String password;
+
+    private UserRole role;
 
 }
